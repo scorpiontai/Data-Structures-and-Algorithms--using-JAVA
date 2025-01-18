@@ -3,119 +3,136 @@ package data_structures.linked_lists.linked_list_implementation;
 import java.util.Arrays;
 
 public class LinkedList {
-    private Node head;
-    private Node tail;
-    private int length;
+    /*
+     * // set head with instance
+     * // set tail with instance
+     * // set length with number
+     * 
+     * // value set in constructor
+     * // set head as value in Node
+     * // set tail as head
+     * // set every length is one
+     * 
+     */
+    Node head;
+    Node tail;
+    int length;
 
     public LinkedList(int value) {
-        head = new Node(value);
-        tail = head;
+        this.head = new Node(value);
+        this.tail = head;
         length = 1;
     }
 
+    // init append with parameter of value
+    // make new instance every set value in node
+    // set tail next is new instance node
+    // set tail is new instance node
+    // set increment for legngth value
+
     public void append(int value) {
         Node newNode = new Node(value);
-        tail.next = newNode;
-        tail = newNode;
+        this.tail.next = newNode;
+        this.tail = newNode;
         length++;
+
     }
 
-    public void prepend(int value) {
-        Node newNode = new Node(value);
-        newNode.next = head;
-        head = newNode;
-        length++;
-    }
+    // make func for print
+    // set list as a int(array) with instance length techniques (one of another best
+    // practices)
+    // init current as intance and set as a head value
+    // init integer as 0
 
-    public int getLength() {
-        return length;
-    }
+    /*
+     * declaration loop in while, if current is not null
+     * loop as set value array/index with set value of current
+     * // set current is a next value of current
+     * //increment for retry loop
+     */
+    // return the array or data
 
     public int[] printList() {
-        int[] myList = new int[length];
+        int[] data = new int[length];
         Node current = this.head;
         int i = 0;
+
         while (current != null) {
-            myList[i] = current.value;
+            data[i] = current.value;
             current = current.next;
             i++;
         }
-        return myList;
+        return data;
     }
 
-    public void insert(int index, int value) {
-        if (index < 0 || index > length) {
-            System.err.println("Index Out Of Bounds For Length " + length);
-        } else if (index == 0) {
-            prepend(value);
-        } else if (index == length) {
-            append(value);
-        } else {
-            Node current = head;
-            for (int i = 0; i < index - 1; i++) {
-                current = current.next;
-            }
-            Node newNode = new Node(value);
-            newNode.next = current.next;
-            current.next = newNode;
-            length++;
-        }
-    }
-
-    public void remove(int index) {
-        if (index < 0 || index > length) {
-            System.err.println("Index Out Of Bounds For Length " + length);
-        } else if (index == 0) {
-            head = this.head.next;
-            length--;
-        } else {
-            Node current = head;
-            int i;
-            for (i = 0; i < index - 1; i++) {
-                current = current.next;
-            }
-            current.next = current.next.next;
-            length--;
-            if (i == length - 1) {
-                tail = current;
-            }
-        }
-    }
-
-    public LinkedList reverse(LinkedList linkedList) {
-        LinkedList newList = new LinkedList(linkedList.head.value);
-        Node current = linkedList.head;
-        while (current.next != null) {
-            current = current.next;
-            Node newNode = new Node(current.value);
-            newNode.next = newList.head;
-            newList.head = newNode;
-            newList.length++;
-        }
-        return newList;
-    }
-
+    /*
+     * public void prepend(int value) {
+     * Node newNode = new Node(value);
+     * newNode.next = head;
+     * head = newNode;
+     * length++;
+     * }
+     * 
+     * public int getLength() {
+     * return length;
+     * }
+     * 
+     * public void insert(int index, int value) {
+     * if (index < 0 || index > length) {
+     * System.err.println("Index Out Of Bounds For Length " + length);
+     * } else if (index == 0) {
+     * prepend(value);
+     * } else if (index == length) {
+     * append(value);
+     * } else {
+     * Node current = head;
+     * for (int i = 0; i < index - 1; i++) {
+     * current = current.next;
+     * }
+     * Node newNode = new Node(value);
+     * newNode.next = current.next;
+     * current.next = newNode;
+     * length++;
+     * }
+     * }
+     * 
+     * public void remove(int index) {
+     * if (index < 0 || index > length) {
+     * System.err.println("Index Out Of Bounds For Length " + length);
+     * } else if (index == 0) {
+     * head = this.head.next;
+     * length--;
+     * } else {
+     * Node current = head;
+     * int i;
+     * for (i = 0; i < index - 1; i++) {
+     * current = current.next;
+     * }
+     * current.next = current.next.next;
+     * length--;
+     * if (i == length - 1) {
+     * tail = current;
+     * }
+     * }
+     * }
+     * 
+     * public LinkedList reverse(LinkedList linkedList) {
+     * LinkedList newList = new LinkedList(linkedList.head.value);
+     * Node current = linkedList.head;
+     * while (current.next != null) {
+     * current = current.next;
+     * Node newNode = new Node(current.value);
+     * newNode.next = newList.head;
+     * newList.head = newNode;
+     * newList.length++;
+     * }
+     * return newList;
+     * }
+     */
 
     public static void main(String[] args) {
-        LinkedList myLinkedList = new LinkedList(10);
-        //append
-        myLinkedList.append(12);
-        myLinkedList.append(16);
-        //prepend
-        myLinkedList.prepend(20);
-        myLinkedList.prepend(50);
-        System.out.println("length: " + myLinkedList.getLength());
-        System.out.println("list: " + Arrays.toString(myLinkedList.printList()));
-        //insert
-        myLinkedList.insert(2, 25);
-        System.out.println("length: " + myLinkedList.getLength());
-        System.out.println("list: " + Arrays.toString(myLinkedList.printList()));
-        //remove
-        myLinkedList.remove(4);
-        System.out.println("length: " + myLinkedList.getLength());
-        System.out.println("list: " + Arrays.toString(myLinkedList.printList()));
-        //reverse
-        LinkedList linkedList2 = myLinkedList.reverse(myLinkedList);
-        System.out.println("reverse linkedList" + Arrays.toString(linkedList2.printList()));
+        LinkedList linkedList = new LinkedList(10);
+        linkedList.append(1);
+        System.out.println(Arrays.toString(linkedList.printList()));
     }
 }
