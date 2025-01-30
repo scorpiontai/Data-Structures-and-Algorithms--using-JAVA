@@ -7,10 +7,10 @@ public class Node {
     int value;
     Node next;
 
-    // the value set for constructor
+    // the value set for constructor  parameter
     // every value set(set in constructor) next value is null
-    public Node(int value) {
-        this.value = value;
+    public Node(int data){
+        this.value = data;
         this.next = null;
     }
 }
